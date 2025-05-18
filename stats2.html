@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Statistik Undian ARIYA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --primary-color: #004c97;
+      --light-bg: #f4f6fb;
+      --card-bg: #ffffff;
+      --accent-green: #28a745;
+      --accent-red: #dc3545;
+      --border-radius: 10px;
+      --turquoise-start: #40e0d0;
+      --turquoise-end: #008080;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: var(--light-bg);
+      padding-top: 80px;
+      position: relative;
+      min-height: 100vh;
+      background: url('https://raw.githubusercontent.com/lurk99/img/main/photo-bgpccoding.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    /* IFRAME sebagai background */
+    .background-iframe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      border: none;
+      pointer-events: none;
+      display: none; /* akan dihidupkan guna JS jika boleh load */
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .header, .container, footer {
+      position: relative;
+      z-index: 2;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(90deg, var(--turquoise-start), var(--turquoise-end));
+      color: white;
+      padding: 12px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+
+    .header img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3),
+                  inset 0 0 10px rgba(255, 255, 255, 0.4);
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+      font-weight: 600;
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    .container {
+      padding: 20px 30px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 1.3rem;
+      color: var(--primary-color);
+    }
+
+    .summary-card {
+      flex: 1 1 150px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .summary-card i {
+      font-size: 1.8rem;
+    }
+
+    .summary-card small {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .summary-card strong {
+      font-size: 1.3rem;
+    }
+
+    .icon {
+      font-size: 1.2rem;
+    }
+
+    .green { color: var(--accent-green); }
+    .red { color: var(--accent-red); }
+
+    canvas {
+      max-width: 400px;
+      margin: auto;
+      display: block;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 8px;
+      font-size: 0.95rem;
+      background-color: transparent;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      background-color: white;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+      text-align: left;
+    }
+
+    th {
+      background-color: #e6eef8;
+      color: #333;
+      box-shadow: none;
+    }
+
+    tbody tr:hover td {
+      background-color: #d1f0f0;
+      box-shadow: 0 4px 12px rgba(0, 128, 128, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    @media screen and (max-width: 600px) {
+      .header {
+        flex-direction: column;
+        align-items: center;
+      }
+      .header h1 {
+        font-size: 1.2rem;
+        margin-top: 8px;
+      }
+      canvas {
+        max-width: 100%;
+      }
+    }
+
+    #ringkasanChart {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+      border-radius: 12px;
+      padding: 10px;
+      background: white;
+    }
+  </style>
+
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/lurk99/img/main/ariyalogo-lnktre.PNG" />
+</head>
+<body>
+  <iframe class="background-iframe" src="https://lurk99.github.io/"></iframe>
+  <div class="overlay"></div>
+
+  <div class="header">
+    <img src="https://raw.githubusercontent.com/lurk99/img/main/ariyalogo-lnktre.PNG" alt="Logo" />
+    <h1>Statistik Undian Penduduk ARIYA</h1>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <h2>Ringkasan Statistik</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between;">
+        <div class="summary-card"><i class="fas fa-thumbs-up green icon"></i><div><strong id="setujuCount">0</strong><br><small>Setuju</small></div></div>
+        <div class="summary-card"><i class="fas fa-thumbs-down red icon"></i><div><strong id="tidakSetujuCount">0</strong><br><small>Tidak Setuju</small></div></div>
+        <div class="summary-card"><i class="fas fa-users icon"></i><div><strong id="jumlahCount">0</strong><br><small>Jumlah Pengundi</small></div></div>
+        <div class="summary-card"><i class="fas fa-house-user icon"></i><div><strong id="totalUnits">324</strong><br><small>Jumlah Unit Rumah</small></div></div>
+        <div class="summary-card"><i class="fas fa-user-slash icon"></i><div><strong id="notVoted">0</strong><br><small>Tidak Mengundi</small></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Graf Undian</h2>
+      <canvas id="ringkasanChart"></canvas>
+    </div>
+
+    <div class="card">
+      <h2>Senarai Undi Unit Rumah</h2>
+      <label for="filter">Tapis mengikut status:</label>
+      <select id="filter" onchange="renderTable()">
+        <option value="all">Semua</option>
+        <option value="setuju">Setuju</option>
+        <option value="tidak setuju">Tidak Setuju</option>
+      </select>
+
+      <table>
+        <thead>
+          <tr><th>🏠 Unit Rumah</th><th>Status</th><th>Alasan</th></tr>
+        </thead>
+        <tbody id="undiTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer><center>&copy; 2025 Lurk Inc.</center></footer>
+
+  <script>
+    // Cuba hidupkan iframe jika laman boleh dimuat
+    const iframe = document.querySelector('.background-iframe');
+    iframe.onload = () => { iframe.style.display = 'block'; };
+
+    const webAppUrl = "https://script.google.com/macros/s/AKfycbyeidBAXNiKTUpFy57veiKvmH46RUdyOghKC42K5qskP1M1o1uD4WvuPb_3qcVpyrhe/exec";
+    const totalUnits = 324;
+    let allUndi = [];
+    let chartInstance = null;
+
+    function fetchAndRender() {
+      fetch(webAppUrl)
+        .then(res => res.json())
+        .then(data => {
+          let undiPerUnit = {};
+          let setujuCount = 0;
+          let tidakSetujuCount = 0;
+
+          data.forEach(item => {
+            const unitRumah = `${item["unit"]}, ${item["Nama Jalan"]}`;
+            const status = item["Undian"]?.trim().toLowerCase();
+            const alasan = item["Alasan"] || "";
+
+            if (!undiPerUnit[unitRumah] && (status === "setuju" || status === "tidak setuju")) {
+              undiPerUnit[unitRumah] = { unit: unitRumah, status, alasan };
+              if (status === "setuju") setujuCount++;
+              else tidakSetujuCount++;
+            }
+          });
+
+          allUndi = Object.values(undiPerUnit);
+
+          const jumlahMengundi = allUndi.length;
+          const jumlahTidakMengundi = totalUnits - jumlahMengundi;
+
+          document.getElementById("setujuCount").textContent = setujuCount;
+          document.getElementById("tidakSetujuCount").textContent = tidakSetujuCount;
+          document.getElementById("jumlahCount").textContent = jumlahMengundi;
+          document.getElementById("totalUnits").textContent = totalUnits;
+          document.getElementById("notVoted").textContent = jumlahTidakMengundi >= 0 ? jumlahTidakMengundi : 0;
+
+          renderChart(setujuCount, tidakSetujuCount);
+          renderTable();
+        })
+        .catch(err => console.error("Error fetching data:", err));
+    }
+
+    function renderChart(setuju, tidakSetuju) {
+      const ctx = document.getElementById("ringkasanChart").getContext("2d");
+      if (chartInstance) chartInstance.destroy();
+      chartInstance = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["Setuju", "Tidak Setuju"],
+          datasets: [{
+            label: "Jumlah Undi",
+            data: [setuju, tidakSetuju],
+            backgroundColor: ["#28a745", "#dc3545"],
+            borderColor: ["#1e7e34", "#c82333"],
+            borderWidth: 2,
+            borderRadius: 10,
+            barThickness: 60,
+          }],
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+        }
+      });
+    }
+
+    function renderTable() {
+      const filter = document.getElementById("filter").value;
+      const tbody = document.getElementById("undiTableBody");
+      tbody.innerHTML = "";
+
+      const filtered = allUndi.filter(item => filter === "all" || item.status === filter);
+
+      filtered.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${item.unit}</td>
+          <td>${item.status.charAt(0).toUpperCase() + item.status.slice(1)}</td>
+          <td>${item.alasan}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    window.onload = fetchAndRender;
+  </script>
+</body>
+</html>
