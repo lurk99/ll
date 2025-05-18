@@ -29,7 +29,6 @@
       background-size: cover;
     }
 
-    /* IFRAME sebagai background */
     .background-iframe {
       position: fixed;
       top: 0;
@@ -39,7 +38,7 @@
       z-index: 0;
       border: none;
       pointer-events: none;
-      display: none; /* akan dihidupkan guna JS jika boleh load */
+      display: none;
     }
 
     .overlay {
@@ -60,25 +59,37 @@
     .header {
       position: fixed;
       top: 0;
+
       width: 100%;
       background: linear-gradient(90deg, var(--turquoise-start), var(--turquoise-end));
       color: white;
-      padding: 12px 30px;
+
       display: flex;
-      align-items: center;
+
       justify-content: center;
       gap: 20px;
       z-index: 1000;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
       text-align: center;
+      flex-wrap: wrap;
+	  
+
+
+
+
+
+	    
+	  
     }
 
     .header img {
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3),
-                  inset 0 0 10px rgba(255, 255, 255, 0.4);
+  height: 50px;
+  width: 50px;
+  margin-right: 20px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+  border: 2px solid white;
+					
     }
 
     .header h1 {
@@ -141,7 +152,8 @@
     .red { color: var(--accent-red); }
 
     canvas {
-      max-width: 400px;
+      max-width: 100%;
+      height: auto !important;
       margin: auto;
       display: block;
     }
@@ -174,17 +186,38 @@
       transition: all 0.3s ease;
     }
 
+    .table-responsive {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    @media screen and (max-width: 768px) {
+      .summary-card {
+        flex: 1 1 45%;
+      }
+    }
+
     @media screen and (max-width: 600px) {
       .header {
         flex-direction: column;
         align-items: center;
       }
+
       .header h1 {
         font-size: 1.2rem;
         margin-top: 8px;
       }
-      canvas {
-        max-width: 100%;
+
+      .container {
+        padding: 20px 15px;
+      }
+
+      .summary-card {
+        flex: 1 1 100%;
+      }
+
+      table {
+        min-width: 500px;
       }
     }
 
@@ -202,10 +235,19 @@
   <iframe class="background-iframe" src="https://lurk99.github.io/"></iframe>
   <div class="overlay"></div>
 
-  <div class="header">
-    <img src="https://raw.githubusercontent.com/lurk99/img/main/ariyalogo-lnktre.PNG" alt="Logo" />
-    <h1>Statistik Undian Penduduk ARIYA</h1>
-  </div>
+
+  
+  
+  <header class="header">
+    <div class="header img">
+<img src="https://raw.githubusercontent.com/lurk99/img/main/ariyalogo-lnktre.PNG" alt="Logo ARIYA" />
+      <h1 class="banner-title">Statistik Undian Penduduk ARIYA</h1>
+    </div>
+  </header>
+  
+  
+  
+  
 
   <div class="container">
     <div class="card">
@@ -233,19 +275,20 @@
         <option value="tidak setuju">Tidak Setuju</option>
       </select>
 
-      <table>
-        <thead>
-          <tr><th>🏠 Unit Rumah</th><th>Status</th><th>Alasan</th></tr>
-        </thead>
-        <tbody id="undiTableBody"></tbody>
-      </table>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr><th>🏠 Unit Rumah</th><th>Status</th><th>Alasan</th></tr>
+          </thead>
+          <tbody id="undiTableBody"></tbody>
+        </table>
+      </div>
     </div>
   </div>
 
   <footer><center>&copy; 2025 Lurk Inc.</center></footer>
 
   <script>
-    // Cuba hidupkan iframe jika laman boleh dimuat
     const iframe = document.querySelector('.background-iframe');
     iframe.onload = () => { iframe.style.display = 'block'; };
 
