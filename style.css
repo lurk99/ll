@@ -1,0 +1,261 @@
+/* Gaya umum */
+body, html {
+  background: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #ffffff;
+  min-height: 100vh;
+  margin: 0;
+  padding-top: 50px; /* ruang untuk banner tetap */
+
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: sans-serif;
+
+  box-sizing: border-box;
+  overflow-x: hidden; /* elak gerak kiri-kanan */
+}
+
+
+
+
+
+/* Banner */
+header.banner {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  background-color: rgba(0, 128, 128, 0.95);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  
+  
+}
+
+  /* Logo bulat + 3D kiri banner */
+.logo-3d-circle {
+  height: 40px;
+  width: 40px;
+  margin-right: 20px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+  border: 2px solid white;
+  
+}
+
+.logo-3d-circle:hover {
+  transform: perspective(300px) rotateY(0deg) scale(1.05);
+}
+
+
+.logo-title {
+  display: flex;
+  align-items: center;
+}
+
+
+
+.banner-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+    
+}
+
+
+
+/* Form container */
+.form-container {
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Form elements */
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #007b7f;
+}
+
+
+
+
+form {
+  max-width: 600px; /* had maksimum lebar */
+  margin: 40px auto; /* tengah di desktop & phone */
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+
+
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+select, input, textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+select:focus, input:focus, textarea:focus {
+  outline: none;
+  border-color: #00bfbf;
+}
+
+button {
+  background-color: #00a8a8;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #008c8c;
+}
+
+/* Alasan toggle */
+#alasanDiv {
+  display: none;
+}
+
+/* Error text */
+#telefonError {
+  color: red;
+  font-size: 12px;
+  display: none;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  margin: 30px auto;
+  padding: 10px;
+  background-color: rgba(0, 128, 128, 0.7);
+  border-radius: 10px;
+  max-width: 400px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .banner-title {
+    font-size: 16px;
+  }
+
+
+
+
+  .form-container {
+    margin: 20px 10px;
+    padding: 20px;
+  }
+  
+}
+  
+.special-group {
+  /* Contoh asingkan background & border untuk mudah nampak */
+  margin-bottom: 15px;
+}
+
+/* Juga jika nak bagi input dalam special-group lain sedikit styling */
+.special-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  /* boleh tambah styling lain khusus input telefon & emel */
+}
+
+
+
+/* Pastikan keseluruhan page layout guna flex column */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Scrollable area di tengah antara header dan footer */
+.scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 90px 20px 80px; /* ruang untuk header & footer */
+}
+
+/* Header tetap */
+header.banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(to right, #006d6d, #004d4d);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Footer tetap bawah */
+.fixed-footer {
+  position: fixed;
+  bottom: -25px;
+  height: var(--footer-height, 0px); /* tinggi footer, boleh ubah pakai CSS variable */
+  left: 0;
+  right: 0;
+  height: 2px;
+
+  background: rgba(0, 0, 0, 0.6); /* Hitam dengan opacity */
+  color: white;
+  text-align: center;
+  line-height: 100px;
+  font-size: 11px;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+.fixed-footer {
+  height: 2px;
+  line-height: 2px;
+  background: rgba(0, 0, 0, 0.6);
+  /* yang lain kekalkan */
+}
+}
+
+

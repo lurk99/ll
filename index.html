@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undian Penduduk ARIYA</title>
+
+  <!-- Pautan CSS -->
+  <link rel="stylesheet" href="style.css" />
+  
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/lurk99/img/main/ariyalogo-lnktre.PNG" />
+  
+</head>
+<body>
+  <!-- Banner Statik -->
+  <header class="banner">
+    <div class="logo-title">
+<img src="https://raw.githubusercontent.com/lurk99/img/main/ariyalogo-lnktre.PNG" alt="Logo ARIYA" class="logo-3d-circle" />
+      <h1 class="banner-title">Undian Penduduk ARIYA</h1>
+    </div>
+  </header>
+
+  <!-- Form Container -->
+  
+  <!-- Konten skrol (form) -->
+  <main class="scroll-area">
+    <div class="form-container">
+      <h2>Borang Undian Security Guard</h2>
+      <form id="undiForm" onsubmit="submitForm(event)">
+  
+  
+  
+  
+      <div class="form-group">
+        <label for="unit">No Unit:</label>
+        <select id="unit" required></select>
+      </div>
+
+      <div class="form-group">
+        <label for="jalan">Nama Jalan:</label>
+        <select id="jalan" required></select>
+      </div>
+
+<div class="form-group special-group">
+        <label for="telefon">Nombor Telefon:</label>
+        <input type="text" id="telefon" name="telefon" placeholder="Contoh: 0123456789" required pattern="^0\d{8,14}$" oninput="validateTelefon(this)" />
+        <div id="telefonError">Sila masukkan nombor telefon sahaja tanpa simbol, contoh: 0123456789</div>
+      </div>
+
+<div class="form-group special-group">
+        <label for="emel">Emel:</label>
+        <input type="email" id="emel" required />
+      </div>
+
+      <div class="form-group">
+        <label for="pilihan">Pilihan:</label>
+        <select id="pilihan" onchange="toggleAlasan(this)" required>
+          <option value="">-- Pilih --</option>
+          <option value="Setuju">Setuju</option>
+          <option value="Tidak Setuju">Tidak Setuju</option>
+        </select>
+      </div>
+
+      <div class="form-group" id="alasanDiv" style="display:none;">
+        <label for="alasan">Alasan:</label>
+        <textarea id="alasan" rows="4" cols="40"></textarea>
+      </div>
+
+      <button type="submit">Hantar Undian</button>
+    </form>
+  </div>
+  </main>
+
+  <!-- Footer Tetap -->
+  <footer class="fixed-footer">
+    ARIYA Polling System by Lurk &copy; 2025
+  </footer>
+
+  <!-- Pautan JS -->
+  <script src="script.js"></script>
+</body>
+</html>
