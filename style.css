@@ -222,14 +222,7 @@ footer {
 
 
 /* Pastikan keseluruhan page layout guna flex column */
-body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
+
 
 /* Scrollable area di tengah antara header dan footer */
 .scroll-area {
