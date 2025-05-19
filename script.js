@@ -1,4 +1,4 @@
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzSa6S9jKN62aMB-HOaWOaimSsoLumvQZ_8Fylv2hZweGnX3g6_z2rJWkyaN-9adeUkcQ/exec'; // Gantikan dengan URL sebenar anda
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzSa6S9jKN62aMB-HOaWOaimSsoLumvQZ_8Fylv2hZweGnX3g6_z2rJWkyaN-9adeUkcQ/exec'; 
 
 function isNumeric(str) {
   return /^\d+$/.test(str);
@@ -76,7 +76,7 @@ function toggleAlasan(select) {
 
 function validateTelefon(input) {
   const errorEl = document.getElementById("telefonError");
-  const valid = /^0\d{8,14}$/.test(input.value); // 9-15 digit termasuk 0 depan
+  const valid = /^0\d{8,14}$/.test(input.value); 
 
   if (!valid && input.value !== "") {
     errorEl.style.display = "block";
