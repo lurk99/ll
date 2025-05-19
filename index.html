@@ -4,16 +4,11 @@
   <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lurk - Sistem Undian Penduduk ARIYA</title>
-
-  <!-- Pautan CSS -->
   <link rel="stylesheet" href="style.css" />
-  
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/lurk99/img/main/ariyalogo-lnktre.PNG" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
 </head>
 <body>
-
 <iframe class="background-iframe" src="https://www.simedarbyproperty.com/serenia-city/"></iframe>
 <div class="overlay"></div>
   <div class="page-content">
@@ -24,54 +19,30 @@
       <h1 class="banner-title">Sistem Undian Penduduk ARIYA</h1>
     </div>
   </header>
-
-  <!-- Form Container -->
-  
-  <!-- Konten skrol (form) -->
   <main class="scroll-area">
     <div class="form-container">
-
-<center>
-
-<img src="https://raw.githubusercontent.com/lurk99/img/main/ariyalogo-lnktre.PNG" 
+<center><img src="https://raw.githubusercontent.com/lurk99/img/main/ariyalogo-lnktre.PNG" 
 onmouseover="this.style.transform='scale(1.1)'" 
 onmouseout="this.style.transform='scale(1)'" 
-style="width:100px; height:105px; border-radius:50%; border:6px solid #fff; box-shadow:0 8px 20px rgba(0,0,0,0.3);  transition:transform 0.3s ease;   display: flex;">
-
-
-
-</center>
-
-   <h2>UNDIAN <br>PELAKSANAAN PEMASANGAN <br>SISTEM BERPALANG AUTOMATIK <br>SERTA PENGAWAL KESELAMATAN <br>DI TAMAN PERUMAHAN <br>SERENIA ARIYA</h2>
-
-	  
-	  </h2>
-      <form id="undiForm" onsubmit="submitForm(event)">
-  
-  
-  
-  
-      <div class="form-group">
+style="width:100px; height:105px; border-radius:50%; border:6px solid #fff; box-shadow:0 8px 20px rgba(0,0,0,0.3);  transition:transform 0.3s ease;   display: flex;"></center><h2>UNDIAN<br>PELAKSANAAN PEMASANGAN<br>SISTEM BERPALANG AUTOMATIK<br>SERTA PENGAWAL KESELAMATAN<br>DI TAMAN PERUMAHAN<br>SERENIA ARIYA</h2>
+  <form id="undiForm" onsubmit="submitForm(event)">
+        <div class="form-group">
         <label for="unit">No Unit:</label>
         <select id="unit" required></select>
       </div>
-
       <div class="form-group">
         <label for="jalan">Nama Jalan:</label>
         <select id="jalan" required></select>
       </div>
-
 <div class="form-group special-group">
         <label for="telefon">Nombor Telefon:</label>
         <input type="text" id="telefon" name="telefon" placeholder="Contoh: 0123456789" required pattern="^0\d{8,14}$" oninput="validateTelefon(this)" />
-        <div id="telefonError">Sila masukkan nombor telefon sahaja tanpa simbol, contoh: 0123456789</div>
+        <div id="telefonError">Sila masukkan nombor telefon sahaja tanpa simbol, contoh: 0125987654</div>
       </div>
-
 <div class="form-group special-group">
         <label for="emel">Emel:</label>
         <input type="email" id="emel" required />
       </div>
-
       <div class="form-group">
         <label for="pilihan">Pilihan:</label>
         <select id="pilihan" onchange="toggleAlasan(this)" required>
@@ -80,23 +51,14 @@ style="width:100px; height:105px; border-radius:50%; border:6px solid #fff; box-
           <option value="Tidak Setuju">Tidak Setuju</option>
         </select>
       </div>
-
       <div class="form-group" id="alasanDiv" style="display:none;">
         <label for="alasan">Alasan:</label>
         <textarea id="alasan" rows="4" cols="40"></textarea>
       </div>
-
       <button type="submit">Hantar Undian</button>
     </form>
   </div>
   </main>
-
-  <!-- Footer Tetap -->
-  <footer class="fixed-footer">
-    ARIYA Polling System by Lurk &copy; 2025
-  </footer>
-
-  <!-- Pautan JS -->
-  <script src="script.js"></script>
+  <footer class="fixed-footer">ARIYA Polling System by Lurk &copy; 2025</footer><script src="script.js"></script>
 </body>
 </html>
