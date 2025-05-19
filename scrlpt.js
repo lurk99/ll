@@ -1,12 +1,9 @@
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzSa6S9jKN62aMB-HOaWOaimSsoLumvQZ_8Fylv2hZweGnX3g6_z2rJWkyaN-9adeUkcQ/exec'; 
-
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzSa6S9jKN62aMB-HOaWOaimSsoLumvQZ_8Fylv2hZweGnX3g6_z2rJWkyaN-9adeUkcQ/exec';
 function isNumeric(str) {
   return /^\d+$/.test(str);
 }
-
 function submitForm(event) {
   event.preventDefault();
-
   const unit = document.getElementById("unit").value;
   const jalan = document.getElementById("jalan").value;
   const telefonInput = document.getElementById("telefon");
@@ -14,22 +11,18 @@ function submitForm(event) {
   const pilihan = document.getElementById("pilihan").value;
   const alasan = document.getElementById("alasan").value.trim();
   const emel = document.getElementById("emel").value.trim();
-
   if (!emel) {
     alert("Sila isi emel anda.");
     return;
   }
-
   if (!isNumeric(telefon)) {
     alert("Sila masukkan nombor telefon tanpa simbol, ruang atau huruf.");
     return;
   }
-
   if (telefon.length < 9 || telefon.length > 15) {
     alert("Nombor telefon mesti antara 9 hingga 15 digit.");
     return;
   }
-
   const formData = new FormData();
   formData.append("unit", unit);
   formData.append("jalan", jalan);
@@ -37,7 +30,6 @@ function submitForm(event) {
   formData.append("pilihan", pilihan);
   formData.append("alasan", alasan);
   formData.append("emel", emel);
-
   fetch(scriptURL, {
     method: "POST",
     body: formData,
@@ -61,7 +53,6 @@ function submitForm(event) {
       alert("Ralat sistem: " + err.message);
     });
 }
-
 function toggleAlasan(select) {
   const alasanDiv = document.getElementById("alasanDiv");
   const alasanInput = document.getElementById("alasan");
@@ -73,32 +64,27 @@ function toggleAlasan(select) {
     alasanInput.required = false;
   }
 }
-
 function validateTelefon(input) {
   const errorEl = document.getElementById("telefonError");
   const valid = /^0\d{8,14}$/.test(input.value); 
-
   if (!valid && input.value !== "") {
     errorEl.style.display = "block";
   } else {
     errorEl.style.display = "none";
   }
 }
-
 window.onload = () => {
   fetch(scriptURL + '?action=getOptions')
     .then((res) => res.json())
     .then((data) => {
       const unitSelect = document.getElementById("unit");
       const jalanSelect = document.getElementById("jalan");
-
       data.units.forEach((u) => {
         const option = document.createElement("option");
         option.value = u;
         option.textContent = u;
         unitSelect.appendChild(option);
       });
-
       data.jalans.forEach((j) => {
         const option = document.createElement("option");
         option.value = j;
