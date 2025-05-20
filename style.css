@@ -1,4 +1,17 @@
-/* Gaya umum */
+#loading-screen {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #main-content {
+      display: none; /* Sembunyi kandungan utama dahulu */
+    }
 body, html {
   background: url('https://raw.githubusercontent.com/lurk99/img/refs/heads/main/sdp-Serenia.jpeg') no-repeat center center fixed;
   background-size: cover;
