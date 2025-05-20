@@ -96,3 +96,13 @@ window.onload = () => {
       alert("Gagal muatkan data dropdown. Sila cuba lagi.");
     });
 };
+window.addEventListener('load', function () {
+  // Delay 5 saat sebelum paparkan kandungan utama
+  setTimeout(function () {
+    const loadingScreen = document.getElementById('loading-screen');
+    const mainContent = document.getElementById('main-content');
+
+    if (loadingScreen) loadingScreen.style.display = 'none';
+    if (mainContent) mainContent.style.display = 'block';
+  }, 1000);
+});
