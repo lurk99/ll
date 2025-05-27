@@ -262,6 +262,12 @@ style="width:50px; height:50px;  transition:transform 0.3s ease;" /></center></d
   &copy; 2025 Lurk Inc.
 </footer>
   <script>
+
+  // Redirect jika tidak login
+  if (localStorage.getItem('loggedIn') !== 'true') {
+    window.location.href = 'loginundi.html';
+  }
+	  
     const iframe = document.querySelector('.background-iframe');
     iframe.onload = () => { iframe.style.display = 'block'; };
     const webAppUrl = "https://script.google.com/macros/s/AKfycbyeidBAXNiKTUpFy57veiKvmH46RUdyOghKC42K5qskP1M1o1uD4WvuPb_3qcVpyrhe/exec";
